@@ -80,6 +80,7 @@ public:
    //   NOTE:  field and equation must have been created before calling this.
 
   G4ElectricField* GetField();
+  G4FieldManager*  GetLocalFieldManager();
    
 protected:
 
@@ -95,6 +96,8 @@ private:
   G4bool                  fVerbose;
 
   G4FieldManager*         fFieldManager;
+
+  G4FieldManager*         fLocalFieldManager; // укащатель на менеджер локального поля
 
   G4ChordFinder*          fChordFinder;
 

@@ -40,9 +40,14 @@ G4VPhysicalVolume* TGFDetectorConstruction::Construct()
 
 
 	// World
-	G4Box *solidWorld = new G4Box("solidWorld", 20 * m, 20 * m, 100 * m);
+	G4Box *solidWorld = new G4Box("solidWorld", 200 * m, 200 * m, 200 * m);
 	flogicWorld = new G4LogicalVolume(solidWorld, air, "flogicWorld");
 	G4VPhysicalVolume *physWorld = new G4PVPlacement(0, G4ThreeVector(0., 0., 0.), flogicWorld, "physWorld", 0, false, 0, true);
+
+	// Test box
+	G4Box *solidTestBox = new G4Box("solidTestBox", 100 * m, 100 * m, 100 * m);
+	fLogicTestBox = new G4LogicalVolume(solidTestBox, air, "fLogicTestBox");
+	G4VPhysicalVolume *physTestBox = new G4PVPlacement(0, G4ThreeVector(0., 0., 0.), fLogicTestBox, "physTestBox", flogicWorld, false, 0, true);
 
 	return physWorld;
 }
@@ -69,6 +74,7 @@ void TGFDetectorConstruction::ConstructSDandField()
 
 	
 	TGFElectricFieldSetup* fieldSetup = new TGFElectricFieldSetup(fFieldVector);
+	fLogicTestBox->SetFieldManager(fieldSetup->GetLocalFieldManager(), true);
 }
 
 
