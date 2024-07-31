@@ -25,7 +25,7 @@ int main(int argc, char** argv)
     G4RunManager* runManager = new G4RunManager();
 
     TGFDetectorConstruction *detectorConstruction = new TGFDetectorConstruction();
-    G4ThreeVector fieldVector(-100000.0*kilovolt/cm, 0.0, 0.0);
+    G4ThreeVector fieldVector(-100.0*kilovolt/cm, 0.0, 0.0);
     detectorConstruction->SetFieldVector(fieldVector);
 
     runManager->SetUserInitialization(detectorConstruction);
@@ -58,10 +58,11 @@ int main(int argc, char** argv)
     UImanager->ApplyCommand("/vis/scene/add/axes 0 0 100 100 m");
 
     ui->SessionStart();
+    delete ui;
+    delete visManager;
     //-----------------------------   
 
-    if (ui) delete ui;
-    delete visManager;
+    
     delete runManager;
 
     return 0;
