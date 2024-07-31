@@ -18,9 +18,9 @@ void TGFPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 	G4ParticleDefinition* particle = particleTable->FindParticle(11);  // electron
 
 
-	G4ThreeVector pos(0.,0., 0.*m);
+	G4ThreeVector pos(150.*m,0., 0.); // тут нужно сделать координату x = 150 * m что бы проверить отсутсвие поля в world
     //G4ThreeVector mom(0.,0.,1.);
-    G4ThreeVector mom(0., 0., 1.);
+    G4ThreeVector mom(0., 1., 0.);
 
     fParticleGun->SetParticleDefinition(particle);
     fParticleGun->SetParticlePosition(pos);

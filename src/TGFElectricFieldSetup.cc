@@ -70,6 +70,7 @@
 TGFElectricFieldSetup::TGFElectricFieldSetup()
  : fMinStep(0.010*mm),  // minimal step of 10 microns
    fFieldManager(0),
+   fLocalFieldManager(0),
    fChordFinder(0),
    fEquation(0),
    fEMfield(0),
@@ -87,7 +88,8 @@ TGFElectricFieldSetup::TGFElectricFieldSetup()
 
   fEquation = new G4EqMagElectricField(fEMfield);
 
-  fFieldManager = GetGlobalFieldManager();
+  //fFieldManager = GetGlobalFieldManager();
+  fLocalFieldManager = new G4FieldManager();
 
   UpdateIntegrator();
   //fFieldMessenger = new F02FieldMessenger(this);
@@ -98,6 +100,7 @@ TGFElectricFieldSetup::TGFElectricFieldSetup()
 TGFElectricFieldSetup::TGFElectricFieldSetup(G4ThreeVector fieldVector)
   : fMinStep(0.010*mm),  // minimal step of 10 microns
     fFieldManager(0),
+    fLocalFieldManager(0),
     fChordFinder(0),
     fEquation(0),
     fEMfield(0),
@@ -109,7 +112,8 @@ TGFElectricFieldSetup::TGFElectricFieldSetup(G4ThreeVector fieldVector)
   fEMfield = new G4UniformElectricField(fieldVector);
   fEquation = new G4EqMagElectricField(fEMfield);
 
-  fFieldManager = GetGlobalFieldManager();
+  //fFieldManager = GetGlobalFieldManager();
+  fLocalFieldManager = new G4FieldManager();
   UpdateIntegrator();
   
   //fFieldMessenger = new F02FieldMessenger(this);
@@ -176,8 +180,10 @@ void TGFElectricFieldSetup::UpdateIntegrator()
      }
   }
 
-  fFieldManager->SetChordFinder(fChordFinder);
-  fFieldManager->SetDetectorField(fEMfield);
+  //fFieldManager->SetChordFinder(fChordFinder);
+  //fFieldManager->SetDetectorField(fEMfield);
+  fLocalFieldManager->SetChordFinder(fChordFinder);
+  fLocalFieldManager->SetDetectorField(fEMfield);
 }
 
 
@@ -277,7 +283,9 @@ void TGFElectricFieldSetup::SetFieldValue(G4ThreeVector fieldVector)
   // Set the value of the Global Field value to fieldVector
 
   // Find the Field Manager for the global field
-  G4FieldManager* fieldMgr= GetGlobalFieldManager();
+  //G4FieldManager* fieldMgr= GetGlobalFieldManager();
+  G4FieldManager* fieldMgr = GetLocalFieldManager();
+  
 
   if (fieldVector != G4ThreeVector(0.,0.,0.))
   {
@@ -304,3 +312,8 @@ G4FieldManager*  TGFElectricFieldSetup::GetGlobalFieldManager()
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+G4FieldManager* TGFElectricFieldSetup::GetLocalFieldManager()
+{
+  return fLocalFieldManager;
+}

@@ -25,7 +25,7 @@ int main(int argc, char** argv)
     G4RunManager* runManager = new G4RunManager();
 
     TGFDetectorConstruction *detectorConstruction = new TGFDetectorConstruction();
-    G4ThreeVector fieldVector(100000.0*kilovolt/cm, 0.0, 0.0);
+    G4ThreeVector fieldVector(-100000.0*kilovolt/cm, 0.0, 0.0);
     detectorConstruction->SetFieldVector(fieldVector);
 
     runManager->SetUserInitialization(detectorConstruction);
@@ -55,7 +55,7 @@ int main(int argc, char** argv)
     UImanager->ApplyCommand("/vis/drawVolume");
     UImanager->ApplyCommand("/vis/viewer/set/autoRefresh true");
     UImanager->ApplyCommand("/vis/scene/add/trajectories smooth");
-    //UImanager->ApplyCommand("/vis/scene/add/axes 0 0 0 100 m");
+    UImanager->ApplyCommand("/vis/scene/add/axes 0 0 100 100 m");
 
     ui->SessionStart();
     //-----------------------------   
