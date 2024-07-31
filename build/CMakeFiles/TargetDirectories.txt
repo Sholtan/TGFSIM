@@ -1,0 +1,4 @@
+/home/yeldos/GEANT/projects/TGFSIM/build/CMakeFiles/TGFSIM.dir
+/home/yeldos/GEANT/projects/TGFSIM/build/CMakeFiles/Simulation.dir
+/home/yeldos/GEANT/projects/TGFSIM/build/CMakeFiles/edit_cache.dir
+/home/yeldos/GEANT/projects/TGFSIM/build/CMakeFiles/rebuild_cache.dir
