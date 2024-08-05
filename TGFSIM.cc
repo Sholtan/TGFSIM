@@ -25,7 +25,7 @@ int main(int argc, char** argv)
     G4RunManager* runManager = new G4RunManager();
 
     TGFDetectorConstruction *detectorConstruction = new TGFDetectorConstruction();
-    G4ThreeVector fieldVector(-100.0*kilovolt/cm, 0.0, 0.0);
+    G4ThreeVector fieldVector(0.0, 0.0, -1.50*kilovolt/cm);
     detectorConstruction->SetFieldVector(fieldVector);
 
     runManager->SetUserInitialization(detectorConstruction);
@@ -37,13 +37,13 @@ int main(int argc, char** argv)
     runManager->Initialize();
 
     //executing run.mac
-    /*
+    
     G4UImanager* UI = G4UImanager::GetUIpointer();
     UI->ApplyCommand("/control/execute run.mac");
-    */
-
+    
     //visualization
     //-----------------------------   
+    /*
     G4UIExecutive* ui = new G4UIExecutive(argc, argv);
 
     G4VisManager* visManager = new G4VisExecutive();
@@ -61,7 +61,7 @@ int main(int argc, char** argv)
     delete ui;
     delete visManager;
     //-----------------------------   
-
+    */
     
     delete runManager;
 

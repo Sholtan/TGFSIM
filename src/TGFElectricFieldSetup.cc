@@ -80,7 +80,7 @@ TGFElectricFieldSetup::TGFElectricFieldSetup()
    fStepperType(4)    // ClassicalRK4 -- the default stepper   
 {
 
-  fEMfield = new G4UniformElectricField( G4ThreeVector(0.0, 0.0, 100000.0*kilovolt/cm));
+  fEMfield = new G4UniformElectricField( G4ThreeVector(0.0, 0.0, 100.0*kilovolt/cm));
 
   //fEMfield = new G4UniformElectricField(
                    //G4ThreeVector(0.0,1.0*kilovolt/cm,0.0));

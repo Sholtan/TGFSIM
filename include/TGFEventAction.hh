@@ -13,8 +13,13 @@ public:
 	TGFEventAction(TGFRunAction*);
 	~TGFEventAction();
 
+	void AddCount() { fCount += 1; }
+
 	virtual void BeginOfEventAction(const G4Event*);
 	virtual void EndOfEventAction(const G4Event*);
+
+private:
+	G4int fCount;
 };
 
 #endif

@@ -19,13 +19,12 @@ void TGFPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 
 
 	G4ThreeVector pos(0.*m,0., 0.); // тут нужно сделать координату x = 150 * m что бы проверить отсутсвие поля в world
-    //G4ThreeVector mom(0.,0.,1.);
-    G4ThreeVector mom(0., 1., 0.);
+    G4ThreeVector mom(0., 0., 1.);
 
     fParticleGun->SetParticleDefinition(particle);
     fParticleGun->SetParticlePosition(pos);
     fParticleGun->SetParticleMomentumDirection(mom);
-    fParticleGun->SetParticleEnergy(100.*MeV);
+    fParticleGun->SetParticleEnergy(0.4*MeV);
 
     fParticleGun->GeneratePrimaryVertex(anEvent);
 }

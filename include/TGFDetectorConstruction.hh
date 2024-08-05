@@ -30,7 +30,9 @@ public:
 
 private:
 	G4LogicalVolume *flogicWorld;
-	G4LogicalVolume *fLogicTestBox;
+	//G4LogicalVolume *fLogicTestBox;
+	G4LogicalVolume *fLogicCloud[300];
+	
 
 	G4Cache<TGFElectricFieldSetup*> fEmFieldSetup;
 
