@@ -9,6 +9,8 @@
 #include "G4Geantino.hh"
 #include "G4IonTable.hh"
 
+#include "Randomize.hh"
+
 class TGFPrimaryGenerator: public G4VUserPrimaryGeneratorAction
 {
 public:

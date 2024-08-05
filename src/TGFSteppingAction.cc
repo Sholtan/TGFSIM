@@ -30,15 +30,14 @@ void TGFSteppingAction::UserSteppingAction(const G4Step *aStep)
 	G4StepPoint* preStepPoint = aStep->GetPreStepPoint();
 	G4ThreeVector positionParticle = preStepPoint->GetPosition();
 
-/*
-	if (track_id != 1)
+
+/*	if (track_id != 1)
 	{
 		track->SetTrackStatus(fStopAndKill);
 		return;
 
 	}
 */
-
 
 	if ((kinEnergy/eV) <= 100.)   //(kinEnergy/eV) <= 100. || globalTime/ microsecond >= 100.  
 	{

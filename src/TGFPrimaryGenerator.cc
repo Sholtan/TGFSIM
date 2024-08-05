@@ -19,7 +19,15 @@ void TGFPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 
 
 	G4ThreeVector pos(0.*m,0., 0.); // тут нужно сделать координату x = 150 * m что бы проверить отсутсвие поля в world
-    G4ThreeVector mom(0., 0., 1.);
+    
+
+
+	G4double theta = (G4double)G4UniformRand()*180.*deg;
+	G4double phi = (G4double)G4UniformRand()*360.*deg;
+
+
+
+    G4ThreeVector mom(sin(theta)*cos(phi), sin(theta)*sin(phi), cos(theta));
 
     fParticleGun->SetParticleDefinition(particle);
     fParticleGun->SetParticlePosition(pos);

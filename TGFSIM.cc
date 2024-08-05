@@ -14,6 +14,8 @@
 #include "TGFActionInitialization.hh"
 #include <QGSP_BERT_HP.hh>
 
+//#include "Randomize.hh"
+
 
 int main(int argc, char** argv)
 {
@@ -35,6 +37,7 @@ int main(int argc, char** argv)
     //runManager->SetNumberOfThreads(4);
 
     runManager->Initialize();
+
 
     //executing run.mac
     
