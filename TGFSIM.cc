@@ -22,7 +22,8 @@ int main(int argc, char** argv)
     for (int i=0; i<argc; i++) {
         G4cout << argv[i] << G4endl;
     }
-
+    // LALALALALALALLALAAL
+    
     G4MTRunManager* runManager = new G4MTRunManager();
     //G4RunManager* runManager = new G4RunManager();
 
