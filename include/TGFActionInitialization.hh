@@ -16,6 +16,7 @@ public:
 	~TGFActionInitialization();
 
 	virtual void Build() const;
+	virtual void BuildForMaster() const;
 };
 
 #endif

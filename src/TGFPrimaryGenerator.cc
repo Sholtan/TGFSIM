@@ -32,7 +32,7 @@ void TGFPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
     fParticleGun->SetParticleDefinition(particle);
     fParticleGun->SetParticlePosition(pos);
     fParticleGun->SetParticleMomentumDirection(mom);
-    fParticleGun->SetParticleEnergy(0.4*MeV);
+    fParticleGun->SetParticleEnergy(30*MeV);
 
     fParticleGun->GeneratePrimaryVertex(anEvent);
 }

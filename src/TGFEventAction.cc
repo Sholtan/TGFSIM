@@ -17,4 +17,8 @@ void TGFEventAction::EndOfEventAction(const G4Event* ev)
     man->FillNtupleIColumn(0, 0, fCount);
     man->FillNtupleIColumn(0, 1, fCount>10000);
 	man->AddNtupleRow(0);
+
+
+    G4int n_event = ev->GetEventID();
+    G4cout << "n_event    =   "<< n_event <<G4endl;
 }

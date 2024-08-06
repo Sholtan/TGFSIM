@@ -1,7 +1,7 @@
 #include <iostream>
 
-//#include "G4MTRunManager.hh"
-#include "G4RunManager.hh"
+#include "G4MTRunManager.hh"
+//#include "G4RunManager.hh"
 
 
 #include "G4UImanager.hh"
@@ -23,8 +23,8 @@ int main(int argc, char** argv)
         G4cout << argv[i] << G4endl;
     }
 
-    //G4MTRunManager* runManager = new G4MTRunManager();
-    G4RunManager* runManager = new G4RunManager();
+    G4MTRunManager* runManager = new G4MTRunManager();
+    //G4RunManager* runManager = new G4RunManager();
 
     TGFDetectorConstruction *detectorConstruction = new TGFDetectorConstruction();
     G4ThreeVector fieldVector(0.0, 0.0, -1.50*kilovolt/cm);
@@ -34,7 +34,7 @@ int main(int argc, char** argv)
     runManager->SetUserInitialization(new QGSP_BERT_HP());
     runManager->SetUserInitialization(new TGFActionInitialization());
 
-    //runManager->SetNumberOfThreads(4);
+    runManager->SetNumberOfThreads(4);
 
     runManager->Initialize();
 

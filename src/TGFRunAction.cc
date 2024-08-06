@@ -3,6 +3,7 @@
 TGFRunAction::TGFRunAction()
 {
     G4AnalysisManager *man = G4AnalysisManager::Instance();
+    man->SetNtupleMerging(true);
 	man->CreateNtuple("Second_particle", "Second_particle");
 	man->CreateNtupleIColumn("Count");
 	man->CreateNtupleIColumn("Over");
@@ -10,7 +11,9 @@ TGFRunAction::TGFRunAction()
 }
 
 TGFRunAction::~TGFRunAction()
-{}
+{
+
+}
 
 void TGFRunAction::BeginOfRunAction(const G4Run* run)
 {

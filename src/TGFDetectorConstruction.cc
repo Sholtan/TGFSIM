@@ -61,7 +61,7 @@ G4VPhysicalVolume* TGFDetectorConstruction::Construct()
 	// Tube
 	G4VPhysicalVolume * physCloud[300];
 
-	G4Tubs *solidCloud = new G4Tubs("solidCloud", 0.0*km, 0.75*km, 4.99999999*m,0.0*deg, 360.0*deg);
+	G4Tubs *solidCloud = new G4Tubs("solidCloud", 0.0*km, 0.75*km, 5*m,0.0*deg, 360.0*deg);
 	for (int i =0; i < 300; i++)
 	{
 		fLogicCloud[i] = new G4LogicalVolume(solidCloud, cloud[i], "fLogicCloud"+std::to_string(i));

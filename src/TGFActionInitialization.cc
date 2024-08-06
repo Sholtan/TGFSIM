@@ -5,6 +5,12 @@ TGFActionInitialization::TGFActionInitialization()
 
 TGFActionInitialization::~TGFActionInitialization()
 {}
+void TGFActionInitialization::BuildForMaster() const
+{
+    TGFRunAction* runAction = new TGFRunAction();
+    SetUserAction(runAction);
+
+}
 
 void TGFActionInitialization::Build() const
 {
