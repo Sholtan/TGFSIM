@@ -317,3 +317,6 @@ G4FieldManager* TGFElectricFieldSetup::GetLocalFieldManager()
 {
   return fLocalFieldManager;
 }
+
+
+

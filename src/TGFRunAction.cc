@@ -30,3 +30,6 @@ void TGFRunAction::EndOfRunAction(const G4Run*)
 	man->Write();
 	man->CloseFile();
 }
+
+
+

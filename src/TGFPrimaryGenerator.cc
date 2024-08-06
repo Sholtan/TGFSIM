@@ -36,3 +36,6 @@ void TGFPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 
     fParticleGun->GeneratePrimaryVertex(anEvent);
 }
+
+
+

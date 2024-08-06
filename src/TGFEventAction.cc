@@ -22,3 +22,6 @@ void TGFEventAction::EndOfEventAction(const G4Event* ev)
     G4int n_event = ev->GetEventID();
     G4cout << "n_event    =   "<< n_event <<G4endl;
 }
+
+
+
