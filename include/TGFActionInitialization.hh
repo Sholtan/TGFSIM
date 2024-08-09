@@ -15,8 +15,16 @@ public:
 	TGFActionInitialization();
 	~TGFActionInitialization();
 
+	void SetPrimaryParticleEnergy(G4double);
+
+
 	virtual void Build() const;
 	virtual void BuildForMaster() const;
+
+
+
+private:
+	G4double fPrimaryParticleEnergy;
 };
 
 #endif

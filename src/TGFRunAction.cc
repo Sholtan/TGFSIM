@@ -15,6 +15,7 @@ TGFRunAction::~TGFRunAction()
 
 }
 
+
 void TGFRunAction::BeginOfRunAction(const G4Run* run)
 {
     G4AnalysisManager* man = G4AnalysisManager::Instance();

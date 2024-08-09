@@ -19,8 +19,11 @@ public:
 
 	virtual void GeneratePrimaries(G4Event*);
 
+	void SetPrimaryEnergy(G4double);
+
 private:
 	G4ParticleGun *fParticleGun;
+	G4double fPrimaryEnergy;
 };
 #endif
 

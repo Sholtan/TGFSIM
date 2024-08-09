@@ -10,6 +10,12 @@ TGFPrimaryGenerator::~TGFPrimaryGenerator()
 	delete fParticleGun;
 }
 
+void TGFPrimaryGenerator::SetPrimaryEnergy(G4double PrimaryEnergy)
+{
+	fPrimaryEnergy = PrimaryEnergy;
+	G4cout << G4endl << "fPrimaryEnergy in TGFPrimaryGenerator was set to " << fPrimaryEnergy << G4endl << G4endl;
+	
+}
 
 void TGFPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 {
@@ -32,7 +38,7 @@ void TGFPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
     fParticleGun->SetParticleDefinition(particle);
     fParticleGun->SetParticlePosition(pos);
     fParticleGun->SetParticleMomentumDirection(mom);
-    fParticleGun->SetParticleEnergy(30*MeV);
+    fParticleGun->SetParticleEnergy(fPrimaryEnergy*MeV);
 
     fParticleGun->GeneratePrimaryVertex(anEvent);
 }

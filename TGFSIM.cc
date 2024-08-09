@@ -19,21 +19,32 @@
 
 int main(int argc, char** argv)
 {
+    if (argc < 2)
+    {
+        G4cout  << G4endl << "ERROR, MISSING ARGUMENT!" << G4endl;
+        return 1;
+    }
     for (int i=0; i<argc; i++) {
         G4cout << argv[i] << G4endl;
     }
-    // LALALALALALALLALAAL
-    
+    G4double PrimaryParticleEnergy = atof(argv[1]);
+
     G4MTRunManager* runManager = new G4MTRunManager();
     //G4RunManager* runManager = new G4RunManager();
 
     TGFDetectorConstruction *detectorConstruction = new TGFDetectorConstruction();
-    G4ThreeVector fieldVector(0.0, 0.0, -1.50*kilovolt/cm);
+    G4ThreeVector fieldVector(0.0, 0.0, -0.75*kilovolt/cm);
     detectorConstruction->SetFieldVector(fieldVector);
 
     runManager->SetUserInitialization(detectorConstruction);
     runManager->SetUserInitialization(new QGSP_BERT_HP());
-    runManager->SetUserInitialization(new TGFActionInitialization());
+
+    TGFActionInitialization *actionInitialization = new TGFActionInitialization();
+    actionInitialization->SetPrimaryParticleEnergy(PrimaryParticleEnergy);
+    runManager->SetUserInitialization(actionInitialization);
+
+
+
 
     runManager->SetNumberOfThreads(4);
 
