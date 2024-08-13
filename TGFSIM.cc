@@ -37,7 +37,7 @@ int main(int argc, char** argv)
     detectorConstruction->SetFieldVector(fieldVector);
 
     runManager->SetUserInitialization(detectorConstruction);
-    runManager->SetUserInitialization(new QGSP_BERT_HP());
+    runManager->SetUserInitialization(new QGSP_BERT_HP(2));
 
     TGFActionInitialization *actionInitialization = new TGFActionInitialization();
     actionInitialization->SetPrimaryParticleEnergy(PrimaryParticleEnergy);
