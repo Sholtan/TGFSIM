@@ -19,25 +19,27 @@
 
 int main(int argc, char** argv)
 {
-    if (argc < 2)
+    if (argc < 3)
     {
-        G4cout  << G4endl << "ERROR, MISSING ARGUMENT!" << G4endl;
+        G4cout << G4endl << G4endl  << G4endl << "ERROR, MISSING ARGUMENTS! PROVIDE PRIMARY PARTICLE ENERGY AS FIRST VALUE AND FIELD VALUE ALONG Z AXIS" << G4endl << G4endl << G4endl << G4endl;
         return 1;
     }
     for (int i=0; i<argc; i++) {
         G4cout << argv[i] << G4endl;
     }
     G4double PrimaryParticleEnergy = atof(argv[1]);
+    G4double z_field_value_negative = atof(argv[2]);
 
     G4MTRunManager* runManager = new G4MTRunManager();
     //G4RunManager* runManager = new G4RunManager();
 
     TGFDetectorConstruction *detectorConstruction = new TGFDetectorConstruction();
-    G4ThreeVector fieldVector(0.0, 0.0, -0.75*kilovolt/cm);
+    
+    G4ThreeVector fieldVector(0.0, 0.0, -1 * z_field_value_negative*kilovolt/cm);
     detectorConstruction->SetFieldVector(fieldVector);
 
     runManager->SetUserInitialization(detectorConstruction);
-    runManager->SetUserInitialization(new QGSP_BERT_HP(2));
+    runManager->SetUserInitialization(new QGSP_BERT_HP(2));   // ARGUMENT IS VERBOSE LEVEL
 
     TGFActionInitialization *actionInitialization = new TGFActionInitialization();
     actionInitialization->SetPrimaryParticleEnergy(PrimaryParticleEnergy);
