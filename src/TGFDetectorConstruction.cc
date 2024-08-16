@@ -31,7 +31,10 @@ G4VPhysicalVolume* TGFDetectorConstruction::Construct()
 	// Material
 	G4NistManager *nist = G4NistManager::Instance();
 
-	G4Material *air = new G4Material("air", 0.8315e-3 * g/cm3, 3);
+
+	G4double density_on_TS = 0.81e-3  // density calculated by Husein: 0.8315e-3, by Ilyas: 0.81e-3
+
+	G4Material *air = new G4Material("air", density_on_TS * g/cm3, 3);     
 	air->AddElement(nist->FindOrBuildElement("N"), 75.5 * perCent);
 	air->AddElement(nist->FindOrBuildElement("O"), 23.2 * perCent);
 	air->AddElement(nist->FindOrBuildElement("Ar"), 1.28 * perCent);
@@ -39,7 +42,7 @@ G4VPhysicalVolume* TGFDetectorConstruction::Construct()
 	G4Material *cloud[300];
 	for (int i =0; i < 300; i++)
 	{
-		cloud[i]= new G4Material("cloud"+ std::to_string(i), (0.8315e-3*exp(-(1000.+i*10.)/8400.)) * g/cm3, 3);
+		cloud[i]= new G4Material("cloud"+ std::to_string(i), (density_on_TS*exp(-(1000.+i*10.)/8400.)) * g/cm3, 3);
 		cloud[i]->AddElement(nist->FindOrBuildElement("N"), 75.5 * perCent);
 		cloud[i]->AddElement(nist->FindOrBuildElement("O"), 23.2 * perCent);
 		cloud[i]->AddElement(nist->FindOrBuildElement("Ar"), 1.28 * perCent);
