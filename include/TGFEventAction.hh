@@ -18,6 +18,9 @@ public:
 	virtual void BeginOfEventAction(const G4Event*);
 	virtual void EndOfEventAction(const G4Event*);
 
+	std::map<int, std::vector<double>> fparticle_info;
+
+
 private:
 	G4int fCount;
 };

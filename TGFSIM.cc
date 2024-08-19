@@ -39,7 +39,7 @@ int main(int argc, char** argv)
     detectorConstruction->SetFieldVector(fieldVector);
 
     runManager->SetUserInitialization(detectorConstruction);
-    runManager->SetUserInitialization(new QGSP_BERT_HP(2));   // ARGUMENT IS VERBOSE LEVEL
+    runManager->SetUserInitialization(new QGSP_BERT_HP(0));   // ARGUMENT IS VERBOSE LEVEL
 
     TGFActionInitialization *actionInitialization = new TGFActionInitialization();
     actionInitialization->SetPrimaryParticleEnergy(PrimaryParticleEnergy);
@@ -50,7 +50,7 @@ int main(int argc, char** argv)
 
     runManager->SetNumberOfThreads(4);
 
-    G4cout << G4endl << G4endl << "NUMBER TH: " << runManager->GetNumberOfThreads() << G4endl<< G4endl;
+    G4cout << G4endl << G4endl << "NUMBER THREADS: " << runManager->GetNumberOfThreads() << G4endl<< G4endl;
 
     runManager->Initialize();
 

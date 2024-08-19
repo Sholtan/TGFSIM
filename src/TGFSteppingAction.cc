@@ -18,6 +18,9 @@ void TGFSteppingAction::UserSteppingAction(const G4Step *aStep)
 	const G4ParticleDefinition* particleDefinition = track->GetParticleDefinition();
 	const G4String& particlename = particleDefinition->GetParticleName();	
 
+	G4double pdgcharge = particleDefinition->GetPDGCharge();
+	G4int pdg = particleDefinition->GetPDGEncoding();
+
 	G4int CurrentStepNumber = track->GetCurrentStepNumber();
 	G4int track_id = track->GetTrackID();
 	G4double globalTime = track->GetGlobalTime();
@@ -51,6 +54,15 @@ void TGFSteppingAction::UserSteppingAction(const G4Step *aStep)
 		fEventAction->AddCount();
 		//G4cout<< "positionParticle: " << positionParticle[2]/m << ", globalTime  =  "<< globalTime/ microsecond << "	, CurrentStepNumber: " << CurrentStepNumber << ", name: " << particlename << ", id: " << track_id << G4endl;
 		//G4cout <<"	kinEnergy		= "<< kinEnergy << "		total Energy     =   "<< Energy  << G4endl;
+	}
+
+	if(pdg == 11)
+	{
+		fEventAction->fparticle_info[0].push_back(kinEnergy / MeV);
+		fEventAction->fparticle_info[1].push_back(positionParticle[0]);
+		fEventAction->fparticle_info[2].push_back(positionParticle[1]);
+		fEventAction->fparticle_info[3].push_back(positionParticle[2]);
+		fEventAction->fparticle_info[4].push_back(globalTime / microsecond);
 	}
 
 }

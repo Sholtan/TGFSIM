@@ -32,7 +32,7 @@ G4VPhysicalVolume* TGFDetectorConstruction::Construct()
 	G4NistManager *nist = G4NistManager::Instance();
 
 
-	G4double density_on_TS = 0.81e-3  // density calculated by Husein: 0.8315e-3, by Ilyas: 0.81e-3
+	G4double density_on_TS = 0.81e-3;  // density calculated by Husein: 0.8315e-3, by Ilyas: 0.81e-3
 
 	G4Material *air = new G4Material("air", density_on_TS * g/cm3, 3);     
 	air->AddElement(nist->FindOrBuildElement("N"), 75.5 * perCent);

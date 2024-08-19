@@ -8,6 +8,14 @@ TGFRunAction::TGFRunAction()
 	man->CreateNtupleIColumn("Count");
 	man->CreateNtupleIColumn("Over");
 	man->FinishNtuple(0);
+
+	man->CreateNtuple("ForTimeDistribution", "ForTimeDistribution");
+	man->CreateNtupleDColumn("kin_E");
+	man->CreateNtupleDColumn("x");
+	man->CreateNtupleDColumn("y");
+	man->CreateNtupleDColumn("z");
+	man->CreateNtupleDColumn("t");
+	man->FinishNtuple(1);
 }
 
 TGFRunAction::~TGFRunAction()
