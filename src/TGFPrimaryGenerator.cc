@@ -19,6 +19,9 @@ void TGFPrimaryGenerator::SetPrimaryEnergy(G4double PrimaryEnergy)
 
 void TGFPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 {
+	G4cout << "************** TGFPrimaryGenerator::GeneratePrimaries" << G4endl;
+	
+
 	G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
 	G4IonTable* Iontable = particleTable->GetIonTable();
 	G4ParticleDefinition* particle = particleTable->FindParticle(11);  // electron
@@ -34,6 +37,14 @@ void TGFPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 
 
     G4ThreeVector mom(sin(theta)*cos(phi), sin(theta)*sin(phi), cos(theta));
+
+//---------------------------------------------------
+    TGFEventInformation *eventInformation = new TGFEventInformation();
+    eventInformation->SetPrimaryMomentumVector(mom);
+    anEvent->SetUserInformation(eventInformation);
+    G4cout << "eventInformation was set" << G4endl;
+//---------------------------------------------------    
+
 
     fParticleGun->SetParticleDefinition(particle);
     fParticleGun->SetParticlePosition(pos);

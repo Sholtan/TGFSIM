@@ -7,9 +7,18 @@ TGFEventAction::TGFEventAction(TGFRunAction*)
 TGFEventAction::~TGFEventAction()
 {}
 
-void TGFEventAction::BeginOfEventAction(const G4Event*)
+void TGFEventAction::BeginOfEventAction(const G4Event* anEvent)
 {
-	fCount =0;
+//-------------------------------------------
+    G4cout << "************** TGFEventAction::BeginOfEventAction" << G4endl;
+    TGFEventInformation *eventInformation = (TGFEventInformation*)anEvent->GetUserInformation();
+    G4ThreeVector mom = eventInformation->GetPrimaryMomentumVector();
+
+    G4cout << "************** from TGFEventAction::BeginOfEventAction mom: " << mom << G4endl;
+
+//-------------------------------------------
+
+    fCount =0;
     fparticle_info = { {0, {}}, {1, {}}, {2, {}},{3, {}},{4, {}}, };
 }
 

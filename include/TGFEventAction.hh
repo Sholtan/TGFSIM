@@ -7,6 +7,9 @@
 
 #include "TGFRunAction.hh"
 
+#include "TGFEventInformation.hh"
+
+
 class TGFEventAction : public G4UserEventAction
 {
 public:

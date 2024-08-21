@@ -8,6 +8,8 @@
 #include "TGFEventAction.hh"
 #include "TGFSteppingAction.hh"
 
+//#include "TGFEventInformation.hh"
+
 
 class TGFActionInitialization: public G4VUserActionInitialization
 {

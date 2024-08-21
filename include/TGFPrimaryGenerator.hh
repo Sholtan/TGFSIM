@@ -11,6 +11,10 @@
 
 #include "Randomize.hh"
 
+#include "TGFEventInformation.hh"
+
+
+
 class TGFPrimaryGenerator: public G4VUserPrimaryGeneratorAction
 {
 public:
