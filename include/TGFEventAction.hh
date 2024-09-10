@@ -26,6 +26,7 @@ public:
 
 private:
 	G4int fCount;
+	G4ThreeVector fPrimaryMomentumVector;
 };
 
 #endif

@@ -31,12 +31,20 @@ void TGFPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
     
 
 
-	G4double theta = (G4double)G4UniformRand()*180.*deg;
-	G4double phi = (G4double)G4UniformRand()*360.*deg;
+	//G4double theta = (G4double)G4UniformRand()*180.*deg;
+	//G4double phi = (G4double)G4UniformRand()*360.*deg;
+
+	// Хусейн, Ильясс был прав, угол theta нужно разыгрывать равномерно по синусу 
+
+	G4double cost = (G4double)G4UniformRand();
+    G4double phi = (G4double)G4UniformRand()*360.*deg;
+    //cost = 1.; // DELETE ME
+    G4double px = sqrt(1. - cost*cost)*cos(phi);
+    G4double py = sqrt(1. - cost*cost)*sin(phi);
+    G4double pz = cost;
+    G4ThreeVector mom(px, py, pz);
 
 
-
-    G4ThreeVector mom(sin(theta)*cos(phi), sin(theta)*sin(phi), cos(theta));
 
 //---------------------------------------------------
     TGFEventInformation *eventInformation = new TGFEventInformation();

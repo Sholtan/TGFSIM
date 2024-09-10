@@ -16,6 +16,13 @@ TGFRunAction::TGFRunAction()
 	man->CreateNtupleDColumn("z");
 	man->CreateNtupleDColumn("t");
 	man->FinishNtuple(1);
+
+	man->CreateNtuple("ForCoordinates", "ForCoordinates");
+	man->CreateNtupleDColumn("r"); //projection onto a vector
+	man->CreateNtupleDColumn("z"); //Primary vector
+	man->FinishNtuple(2);
+
+
 }
 
 TGFRunAction::~TGFRunAction()
