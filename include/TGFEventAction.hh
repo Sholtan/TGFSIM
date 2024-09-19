@@ -21,7 +21,9 @@ public:
 	virtual void BeginOfEventAction(const G4Event*);
 	virtual void EndOfEventAction(const G4Event*);
 
-	std::map<int, std::vector<double>> fparticle_info;
+	std::map<int, std::vector<double>> felectron_info;
+	std::map<int, std::vector<double>> fpositron_info;
+	std::map<int, std::vector<double>> fphoton_info;
 
 
 private:

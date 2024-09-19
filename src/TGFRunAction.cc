@@ -9,7 +9,7 @@ TGFRunAction::TGFRunAction()
 	man->CreateNtupleIColumn("Over");
 	man->FinishNtuple(0);
 
-	man->CreateNtuple("ForTimeDistribution", "ForTimeDistribution");
+	man->CreateNtuple("electron_steps_info", "e_steps_info");
 	man->CreateNtupleDColumn("kin_E");
 	man->CreateNtupleDColumn("x");
 	man->CreateNtupleDColumn("y");
@@ -17,11 +17,21 @@ TGFRunAction::TGFRunAction()
 	man->CreateNtupleDColumn("t");
 	man->FinishNtuple(1);
 
-	man->CreateNtuple("ForCoordinates", "ForCoordinates");
-	man->CreateNtupleDColumn("r"); //projection onto a vector
-	man->CreateNtupleDColumn("z"); //Primary vector
+	man->CreateNtuple("positron_steps_info", "e_steps_info");
+	man->CreateNtupleDColumn("kin_E");
+	man->CreateNtupleDColumn("x");
+	man->CreateNtupleDColumn("y");
+	man->CreateNtupleDColumn("z");
+	man->CreateNtupleDColumn("t");
 	man->FinishNtuple(2);
 
+	man->CreateNtuple("photon_steps_info", "photon_steps_info");
+	man->CreateNtupleDColumn("kin_E");
+	man->CreateNtupleDColumn("x");
+	man->CreateNtupleDColumn("y");
+	man->CreateNtupleDColumn("z");
+	man->CreateNtupleDColumn("t");
+	man->FinishNtuple(3);
 
 }
 

@@ -2,7 +2,9 @@
 
 TGFEventAction::TGFEventAction(TGFRunAction*)
 {
-    fparticle_info = { {0, {}}, {1, {}}, {2, {}},{3, {}},{4, {}}, };
+    felectron_info = { {0, {}}, {1, {}}, {2, {}},{3, {}}, {4, {}}, {5, {}}};
+    fpositron_info = { {0, {}}, {1, {}}, {2, {}},{3, {}}, {4, {}}, {5, {}}};
+    fphoton_info = { {0, {}}, {1, {}}, {2, {}},{3, {}}, {4, {}}, {5, {}}};
 }
 TGFEventAction::~TGFEventAction()
 {}
@@ -21,58 +23,60 @@ void TGFEventAction::BeginOfEventAction(const G4Event* anEvent)
 //-------------------------------------------
 
     fCount =0;
-    fparticle_info = { {0, {}}, {1, {}}, {2, {}},{3, {}},{4, {}}, };
+    felectron_info = { {0, {}}, {1, {}}, {2, {}},{3, {}},{4, {}}, {5, {}}};
+    fpositron_info = { {0, {}}, {1, {}}, {2, {}},{3, {}},{4, {}}, {5, {}}};
+    fphoton_info = { {0, {}}, {1, {}}, {2, {}},{3, {}},{4, {}}, {5, {}}};
 }
 
 void TGFEventAction::EndOfEventAction(const G4Event* ev)
 {
-	G4AnalysisManager* man = G4AnalysisManager::Instance();
+    G4AnalysisManager* man = G4AnalysisManager::Instance();
     man->FillNtupleIColumn(0, 0, fCount);
     man->FillNtupleIColumn(0, 1, fCount>10000);
-	man->AddNtupleRow(0);
+    man->AddNtupleRow(0);
 
+    
+    int electron_info_size = felectron_info[0].size();
+    int positron_info_size = fpositron_info[0].size();
+    int photon_info_size = fphoton_info[0].size();
 
-    double r=0;
-    double z=0;
-    double comp1=0; //ay*bz-az*by
-    double comp2=0;   //az*bx-ax*bz
-    double comp3=0;   //ax*by-ay*bx
-    int particle_info_size = fparticle_info[0].size();
-    for (G4int i = 0; i < particle_info_size; i++)
+    for (G4int i = 0; i < electron_info_size; i++)
     {
-        man->FillNtupleDColumn(1, 0, fparticle_info[0][i]);
-        man->FillNtupleDColumn(1, 1, fparticle_info[1][i]); //X
-        man->FillNtupleDColumn(1, 2, fparticle_info[2][i]); //Y
-        man->FillNtupleDColumn(1, 3, fparticle_info[3][i]); //Z
-        man->FillNtupleDColumn(1, 4, fparticle_info[4][i]);
+        man->FillNtupleDColumn(1, 0, felectron_info[0][i]);
+        man->FillNtupleDColumn(1, 1, felectron_info[1][i]); //X
+        man->FillNtupleDColumn(1, 2, felectron_info[2][i]); //Y
+        man->FillNtupleDColumn(1, 3, felectron_info[3][i]); //Z
+        man->FillNtupleDColumn(1, 4, felectron_info[4][i]);
         man->AddNtupleRow(1);
-
-
-       
-        //G4cout <<"  X  =   "<<   fparticle_info[1][i] <<  "         Y    = " << fparticle_info[2][i]<< "         Z   =  " <<fparticle_info[3][i] <<G4endl;
-        comp1 =(fparticle_info[2][i]*fPrimaryMomentumVector[2]-fparticle_info[3][i]*fPrimaryMomentumVector[1]);
-        comp2 =(fparticle_info[3][i]*fPrimaryMomentumVector[0]-fparticle_info[1][i]*fPrimaryMomentumVector[2]);
-        comp3 =(fparticle_info[1][i]*fPrimaryMomentumVector[1]-fparticle_info[2][i]*fPrimaryMomentumVector[0]);
-        //G4cout <<"  comp1  =   "<<   comp1 <<  "         comp2    = " << comp2<< "         comp3   =  " <<comp3 <<G4endl;
-        r = sqrt(comp1*comp1+comp2*comp2+comp3*comp3);
-        //G4cout <<"  r  =   "<<   r << G4endl;
-        z = sqrt (fparticle_info[1][i]*fparticle_info[1][i]+fparticle_info[2][i]*fparticle_info[2][i]+fparticle_info[3][i]*fparticle_info[3][i]-r*r);
-        //G4cout <<"  r  =   "<<   r << "     z  =   "<<   z << G4endl;
-        man->FillNtupleDColumn(2, 0, r);
-        man->FillNtupleDColumn(2, 1, z);
-        man->AddNtupleRow(2);
-
-        
     }
-    //G4cout << fPrimaryMomentumVector <<G4endl;
 
-  
+    for (G4int i = 0; i < positron_info_size; i++)
+    {
+        man->FillNtupleDColumn(2, 0, fpositron_info[0][i]);
+        man->FillNtupleDColumn(2, 1, fpositron_info[1][i]); //X
+        man->FillNtupleDColumn(2, 2, fpositron_info[2][i]); //Y
+        man->FillNtupleDColumn(2, 3, fpositron_info[3][i]); //Z
+        man->FillNtupleDColumn(2, 4, fpositron_info[4][i]);
+        man->AddNtupleRow(2);
+    }
+
+    for (G4int i = 0; i < photon_info_size; i++)
+    {
+        man->FillNtupleDColumn(3, 0, fphoton_info[0][i]);
+        man->FillNtupleDColumn(3, 1, fphoton_info[1][i]); //X
+        man->FillNtupleDColumn(3, 2, fphoton_info[2][i]); //Y
+        man->FillNtupleDColumn(3, 3, fphoton_info[3][i]); //Z
+        man->FillNtupleDColumn(3, 4, fphoton_info[4][i]);
+        man->AddNtupleRow(3);       
+    }
+
+
+    
    
 
 
     G4int n_event = ev->GetEventID();
     G4cout << "n_event    =   "<< n_event <<G4endl;
 }
-
 
 

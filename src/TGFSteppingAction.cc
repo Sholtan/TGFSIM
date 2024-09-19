@@ -33,6 +33,9 @@ void TGFSteppingAction::UserSteppingAction(const G4Step *aStep)
 	G4StepPoint* preStepPoint = aStep->GetPreStepPoint();
 	G4ThreeVector positionParticle = preStepPoint->GetPosition();
 
+	G4double trackLength = track->GetTrackLength();
+	G4double stepLength = track->GetStepLength();
+
 
 /*	if (track_id != 1)
 	{
@@ -57,18 +60,52 @@ void TGFSteppingAction::UserSteppingAction(const G4Step *aStep)
 	G4cerr << track_id << G4endl; 
 	}
 */
-	if(pdg == 11)
+/*
+	if(pdg != 11 && pdg != 22)
 	{
-		if ((kinEnergy/keV) > 1.)
-		{
-			fEventAction->fparticle_info[0].push_back(kinEnergy / MeV);
-			fEventAction->fparticle_info[1].push_back(positionParticle[0]);
-			fEventAction->fparticle_info[2].push_back(positionParticle[1]);
-			fEventAction->fparticle_info[3].push_back(positionParticle[2]);
-			fEventAction->fparticle_info[4].push_back(globalTime / microsecond);
-		}
-		
+		G4cout << "particlename: " << particlename << ", pdg: " << pdg << G4endl;
 	}
+*/
+	if(pdg == 11)  // electron
+	{
+		//if ((kinEnergy/keV) > 1.)    // (kinEnergy/keV) > 1.
+		//{
+			fEventAction->felectron_info[0].push_back(kinEnergy / MeV);
+			fEventAction->felectron_info[1].push_back(positionParticle[0]);
+			fEventAction->felectron_info[2].push_back(positionParticle[1]);
+			fEventAction->felectron_info[3].push_back(positionParticle[2]);
+			fEventAction->felectron_info[4].push_back(globalTime / microsecond);
+			fEventAction->felectron_info[5].push_back(stepLength/m);
+		//}
+		
+		//G4cout << "trackLength: " << trackLength << ", stepLength" << stepLength << ",  track_id: " << track_id << ", globalTime: " << globalTime/ microsecond << ",  CurrentStepNumber: " << CurrentStepNumber << G4endl;
+	}
+
+	if(pdg == -11)  // positron
+	{
+		//if ((kinEnergy/keV) > 1.)    // (kinEnergy/keV) > 1.
+		//{
+			fEventAction->fpositron_info[0].push_back(kinEnergy / MeV);
+			fEventAction->fpositron_info[1].push_back(positionParticle[0]);
+			fEventAction->fpositron_info[2].push_back(positionParticle[1]);
+			fEventAction->fpositron_info[3].push_back(positionParticle[2]);
+			fEventAction->fpositron_info[4].push_back(globalTime / microsecond);
+			fEventAction->fpositron_info[5].push_back(stepLength/m);
+		//}
+		
+		//G4cout << "trackLength: " << trackLength << ", stepLength" << stepLength << ",  track_id: " << track_id << ", globalTime: " << globalTime/ microsecond << ",  CurrentStepNumber: " << CurrentStepNumber << G4endl;
+	}
+
+	if(pdg == 22)   // gamma
+	{
+			fEventAction->fphoton_info[0].push_back(kinEnergy / MeV);
+			fEventAction->fphoton_info[1].push_back(positionParticle[0]);
+			fEventAction->fphoton_info[2].push_back(positionParticle[1]);
+			fEventAction->fphoton_info[3].push_back(positionParticle[2]);
+			fEventAction->fphoton_info[4].push_back(globalTime / microsecond);
+			fEventAction->fphoton_info[5].push_back(stepLength/m);		
+	}
+
 
 }
 

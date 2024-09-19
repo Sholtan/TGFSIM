@@ -29,19 +29,33 @@ G4VPhysicalVolume* TGFDetectorConstruction::Construct()
 {
 	
 	// Material
-	G4NistManager *nist = G4NistManager::Instance();
-
-
+	
+	//G4double density_on_sea_level = 1.29e-3;  // 1.29
 	//G4double density_on_TS = 0.81e-3;  // density calculated by Huseyin: 0.8315e-3, by Ilyas: 0.81e-3
-	G4double density_on_TS = 0.45e-3;  // density calculated by Huseyin: 0.4471e-3, by Ilyas: 0.81e-3 for 5 km up
+	//G4double density_on_TS = 0.45e-3;  // density calculated by Huseyin: 0.4471e-3, by Ilyas: 0.81e-3 for 5 km up
 
-	G4Material *air = new G4Material("air", density_on_TS * g/cm3, 3);     
-	air->AddElement(nist->FindOrBuildElement("N"), 75.5 * perCent);
-	air->AddElement(nist->FindOrBuildElement("O"), 23.2 * perCent);
-	air->AddElement(nist->FindOrBuildElement("Ar"), 1.28 * perCent);
+	G4Material *WorldMat = new G4Material("WorldMat", 0.00000000000000025 * g/cm3, 3);     
+	WorldMat->AddElement(nist->FindOrBuildElement("N"), 75.5 * perCent);
+	WorldMat->AddElement(nist->FindOrBuildElement("O"), 23.2 * perCent);
+	WorldMat->AddElement(nist->FindOrBuildElement("Ar"), 1.28 * perCent);
 
-	G4Material *cloud[300];
-	for (int i =0; i < 300; i++)
+	// World
+	G4Box *solidWorld = new G4Box("solidWorld", 2.5 * km, 2.5 * km, 2.5 * km);
+	flogicWorld = new G4LogicalVolume(solidWorld, WorldMat, "flogicWorld");
+	G4VPhysicalVolume *physWorld = new G4PVPlacement(0, G4ThreeVector(0., 0., 0.), flogicWorld, "physWorld", 0, false, 0, true);
+	
+
+	CreateAtmosphere();
+	CreateCloud();
+
+	return physWorld;
+}
+
+
+void TGFDetectorConstruction::CreateCloud()
+{
+	G4Material *cloud[n_layers_cloud];
+	for (int i =0; i < n_layers_cloud; i++)
 	{
 		cloud[i]= new G4Material("cloud"+ std::to_string(i), (density_on_TS*exp(-(1000.+i*10.)/8400.)) * g/cm3, 3);
 		cloud[i]->AddElement(nist->FindOrBuildElement("N"), 75.5 * perCent);
@@ -50,31 +64,42 @@ G4VPhysicalVolume* TGFDetectorConstruction::Construct()
 	}
 
 
-
-	// World
-	G4Box *solidWorld = new G4Box("solidWorld", 2.5 * km, 2.5 * km, 2.5 * km);
-	flogicWorld = new G4LogicalVolume(solidWorld, air, "flogicWorld");
-	G4VPhysicalVolume *physWorld = new G4PVPlacement(0, G4ThreeVector(0., 0., 0.), flogicWorld, "physWorld", 0, false, 0, true);
-	
-/*	// Test box
-	G4Box *solidTestBox = new G4Box("solidTestBox", 100 * m, 100 * m, 100 * m);
-	fLogicTestBox = new G4LogicalVolume(solidTestBox, air, "fLogicTestBox");
-	G4VPhysicalVolume *physTestBox = new G4PVPlacement(0, G4ThreeVector(0., 0., 0.), fLogicTestBox, "physTestBox", flogicWorld, false, 0, true);
-*/
-
 	// Tube
-	G4VPhysicalVolume * physCloud[300];
+	G4VPhysicalVolume * physCloud[n_layers_cloud];
 
-	G4Tubs *solidCloud = new G4Tubs("solidCloud", 0.0*km, 0.75*km, 5*m,0.0*deg, 360.0*deg);
-	for (int i =0; i < 300; i++)
+	G4Tubs *solidCloud = new G4Tubs("solidCloud", 0.0*km, 0.75*km, 5.*m,0.0*deg, 360.0*deg);
+	for (int i =0; i < n_layers_cloud; i++)
 	{
 		fLogicCloud[i] = new G4LogicalVolume(solidCloud, cloud[i], "fLogicCloud"+std::to_string(i));
-		physCloud[i] = new G4PVPlacement(0, G4ThreeVector(0., 0., (-1495.0+ i*10.0)*m), fLogicCloud[i], "physCloud"+ std::to_string(i), flogicWorld, false, 0, true);
+		physCloud[i] = new G4PVPlacement(0, G4ThreeVector(0., 0., 0.), fLogicCloud[i], "physCloud"+ std::to_string(i), fLogicAtmosphere[100+i], false, 0, true);
+	}
+}
+
+
+void TGFDetectorConstruction::CreateAtmosphere()
+{
+	
+	G4Material *Atmosphere[n_layers_atmosphere];
+	for (int i =0; i < n_layers_atmosphere; i++)
+	{
+		Atmosphere[i]= new G4Material("Atmosphere"+ std::to_string(i), (density_on_TS*exp(-(i*10.)/8400.)) * g/cm3, 3);
+		Atmosphere[i]->AddElement(nist->FindOrBuildElement("N"), 75.5 * perCent);
+		Atmosphere[i]->AddElement(nist->FindOrBuildElement("O"), 23.2 * perCent);
+		Atmosphere[i]->AddElement(nist->FindOrBuildElement("Ar"), 1.28 * perCent);
 	}
 
-
-	return physWorld;
+	G4VPhysicalVolume * physAtmosphere[n_layers_atmosphere];
+	G4Box *solidAtmosphere = new G4Box("solidAtmosphere", 2.5 * km, 2.5 * km, 5. * m);
+	for (int i =0; i< n_layers_atmosphere; i++)
+	{
+		fLogicAtmosphere[i] = new G4LogicalVolume(solidAtmosphere, Atmosphere[i], "fLogicAtmosphere"+std::to_string(i)); 
+		G4double z_coord = (-2495. + i*10.0)*m;
+		physAtmosphere[i] = new G4PVPlacement(0, G4ThreeVector(0., 0., z_coord), fLogicAtmosphere[i], "physAtmosphere"+ std::to_string(i), flogicWorld, false, 0, true);
+	}
 }
+
+
+
 
 void TGFDetectorConstruction::SetFieldVector(G4ThreeVector fieldVector)
 {

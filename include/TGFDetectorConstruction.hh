@@ -27,11 +27,22 @@ public:
 
 	virtual G4VPhysicalVolume *Construct();
 	void SetFieldVector(G4ThreeVector);
+	G4double density_on_TS = 0.81e-3;
+	G4NistManager *nist = G4NistManager::Instance();
+
+	void CreateCloud();
+	void CreateAtmosphere();
+
+	const static G4int n_layers_atmosphere = 500;
+	//G4int n_layers_cloud = 300;
+	const static G4int n_layers_cloud = 300;
+
 
 private:
 	G4LogicalVolume *flogicWorld;
-	//G4LogicalVolume *fLogicTestBox;
-	G4LogicalVolume *fLogicCloud[300];
+	G4LogicalVolume *fLogicCloud[n_layers_cloud];
+	G4LogicalVolume *fLogicAtmosphere[n_layers_atmosphere];
+
 	
 
 	G4Cache<TGFElectricFieldSetup*> fEmFieldSetup;
