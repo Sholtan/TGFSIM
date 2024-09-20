@@ -19,16 +19,19 @@
 
 int main(int argc, char** argv)
 {
-    if (argc < 3)
+    if (argc != 5)
     {
-        G4cout << G4endl << G4endl  << G4endl << "ERROR, MISSING ARGUMENTS! PROVIDE PRIMARY PARTICLE ENERGY AS FIRST VALUE AND FIELD VALUE ALONG Z AXIS" << G4endl << G4endl << G4endl << G4endl;
+        G4cout << G4endl << G4endl  << G4endl << "ERROR, MISSING ARGUMENTS! PROVIDE PRIMARY PARTICLE ENERGY AS FIRST VALUE AND FIELD VALUE ALONG Z AXIS AS 2ND VALUE, INNER SOLID ANGLE AS 3RD VALUE AND OUTTER SOLID ANGLE AS 4TH VALUE " << G4endl << G4endl << G4endl << G4endl;
         return 1;
     }
-    for (int i=0; i<argc; i++) {
-        G4cout << argv[i] << G4endl;
-    }
+
+    G4cout << G4endl<< "Energy = " << argv[1]<<", Field value = "<< argv[2]<<", Inner Solid Angle = "<< argv[3]<<", Outer Solid Angle = "<<argv[4]<< G4endl;
+
+
     G4double PrimaryParticleEnergy = atof(argv[1]);
     G4double z_field_value_negative = atof(argv[2]);
+    G4double InnerAngle = atof(argv[3]);
+    G4double OuterAngle = atof(argv[4]);
 
     G4MTRunManager* runManager = new G4MTRunManager();
     //G4RunManager* runManager = new G4RunManager();
@@ -43,6 +46,7 @@ int main(int argc, char** argv)
 
     TGFActionInitialization *actionInitialization = new TGFActionInitialization();
     actionInitialization->SetPrimaryParticleEnergy(PrimaryParticleEnergy);
+    actionInitialization->SetAngles(InnerAngle, OuterAngle);
     runManager->SetUserInitialization(actionInitialization);
 
 

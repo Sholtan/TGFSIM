@@ -17,6 +17,15 @@ void TGFPrimaryGenerator::SetPrimaryEnergy(G4double PrimaryEnergy)
 	
 }
 
+	
+void TGFPrimaryGenerator::SetAngles(G4double InnerAngle, G4double OuterAngle)
+{
+	fInnerAngle = InnerAngle;
+	fOuterAngle	= OuterAngle;
+	G4cout << G4endl << "fAngles in TGFPrimaryGenerator was set to InnerAngle  = " << InnerAngle << ", OuterAngle = " << OuterAngle << G4endl << G4endl;
+
+}
+
 void TGFPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 {
 	G4cout << "************** TGFPrimaryGenerator::GeneratePrimaries" << G4endl;
@@ -36,8 +45,10 @@ void TGFPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 
 	// Хусейн, Ильясс был прав, угол theta нужно разыгрывать равномерно по синусу 
 
-	G4double cost = (G4double)G4UniformRand()*2. - 1.;
+	//G4double cost = (G4double)G4UniformRand()*2-1;
+	G4double cost = (G4double)G4UniformRand()*(cos(fInnerAngle*deg)-cos(fOuterAngle*deg))+cos(fOuterAngle*deg);
     G4double phi = (G4double)G4UniformRand()*360.*deg;
+    //cost = 1.; // DELETE ME
     G4double px = sqrt(1. - cost*cost)*cos(phi);
     G4double py = sqrt(1. - cost*cost)*sin(phi);
     G4double pz = cost;

@@ -24,10 +24,14 @@ public:
 	virtual void GeneratePrimaries(G4Event*);
 
 	void SetPrimaryEnergy(G4double);
+	void SetAngles(G4double, G4double);
+	
 
 private:
 	G4ParticleGun *fParticleGun;
 	G4double fPrimaryEnergy;
+	G4double fInnerAngle;
+	G4double fOuterAngle;
 };
 #endif
 

@@ -18,7 +18,8 @@ public:
 	~TGFActionInitialization();
 
 	void SetPrimaryParticleEnergy(G4double);
-
+	void SetAngles(G4double,G4double);
+	
 
 	virtual void Build() const;
 	virtual void BuildForMaster() const;
@@ -27,6 +28,8 @@ public:
 
 private:
 	G4double fPrimaryParticleEnergy;
+	G4double fInnerAngle;
+	G4double fOuterAngle;
 };
 
 #endif
