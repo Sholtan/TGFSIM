@@ -27,14 +27,14 @@ public:
 
 	virtual G4VPhysicalVolume *Construct();
 	void SetFieldVector(G4ThreeVector);
-	G4double density_on_TS = 0.81e-3;
+	G4double density_on_TS = 0.81e-3;  // in g/cm3
 	G4NistManager *nist = G4NistManager::Instance();
 
 	void CreateCloud();
 	void CreateAtmosphere();
 
+	// these next 2 variables can not be changed
 	const static G4int n_layers_atmosphere = 500;
-	//G4int n_layers_cloud = 300;
 	const static G4int n_layers_cloud = 300;
 
 

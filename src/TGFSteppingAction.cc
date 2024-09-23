@@ -11,10 +11,10 @@ TGFSteppingAction::~TGFSteppingAction()
 
 void TGFSteppingAction::UserSteppingAction(const G4Step *aStep)
 {
+
+	
 	G4Track* track = aStep->GetTrack();
 	
-
-
 	const G4ParticleDefinition* particleDefinition = track->GetParticleDefinition();
 	const G4String& particlename = particleDefinition->GetParticleName();	
 
@@ -45,12 +45,21 @@ void TGFSteppingAction::UserSteppingAction(const G4Step *aStep)
 	}
 */
 
+
+
+
 	if ((kinEnergy/eV) <= 100.)   //(kinEnergy/eV) <= 100. || globalTime/ microsecond >= 100.  
 	{
 		track->SetTrackStatus(fStopAndKill);
 		return;
 
 	}
+
+
+
+
+
+
 /*
 	if (CurrentStepNumber == 1)  // CurrentStepNumber == 1   track_id == 1
 	{	
@@ -66,6 +75,9 @@ void TGFSteppingAction::UserSteppingAction(const G4Step *aStep)
 		G4cout << "particlename: " << particlename << ", pdg: " << pdg << G4endl;
 	}
 */
+
+
+	
 	if(pdg == 11)  // electron
 	{
 		//if ((kinEnergy/keV) > 1.)    // (kinEnergy/keV) > 1.

@@ -33,12 +33,12 @@ int main(int argc, char** argv)
     G4double InnerAngle = atof(argv[3]);
     G4double OuterAngle = atof(argv[4]);
 
-    G4MTRunManager* runManager = new G4MTRunManager();
-    //G4RunManager* runManager = new G4RunManager();
+    G4MTRunManager* runManager = new G4MTRunManager();     // Multithreaded mode
+    //G4RunManager* runManager = new G4RunManager();     //  Single thread mode
 
     TGFDetectorConstruction *detectorConstruction = new TGFDetectorConstruction();
     
-    G4ThreeVector fieldVector(0.0, 0.0, -1 * z_field_value_negative*kilovolt/cm);
+    G4ThreeVector fieldVector(0.0, 0.0, -1 * z_field_value_negative*kilovolt/cm);      // multiplied by -1 so that in field +1.5 kv/cm electrons are accelerated up
     detectorConstruction->SetFieldVector(fieldVector);
 
     runManager->SetUserInitialization(detectorConstruction);
