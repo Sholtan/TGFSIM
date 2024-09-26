@@ -13,7 +13,7 @@ TGFPrimaryGenerator::~TGFPrimaryGenerator()
 void TGFPrimaryGenerator::SetPrimaryEnergy(G4double PrimaryEnergy)
 {
 	fPrimaryEnergy = PrimaryEnergy;
-	G4cout << G4endl << "fPrimaryEnergy in TGFPrimaryGenerator was set to " << fPrimaryEnergy << G4endl << G4endl;
+	//G4cout << G4endl << "fPrimaryEnergy in TGFPrimaryGenerator was set to " << fPrimaryEnergy << G4endl << G4endl;
 	
 }
 
@@ -22,13 +22,13 @@ void TGFPrimaryGenerator::SetAngles(G4double InnerAngle, G4double OuterAngle)
 {
 	fInnerAngle = InnerAngle;
 	fOuterAngle	= OuterAngle;
-	G4cout << G4endl << "fAngles in TGFPrimaryGenerator was set to InnerAngle  = " << InnerAngle << ", OuterAngle = " << OuterAngle << G4endl << G4endl;
+	//G4cout << G4endl << "fAngles in TGFPrimaryGenerator was set to InnerAngle  = " << InnerAngle << ", OuterAngle = " << OuterAngle << G4endl << G4endl;
 
 }
 
 void TGFPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 {
-	G4cout << "************** TGFPrimaryGenerator::GeneratePrimaries" << G4endl;
+	//G4cout << "************** TGFPrimaryGenerator::GeneratePrimaries" << G4endl;
 	
 
 	G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
@@ -61,7 +61,7 @@ void TGFPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
     TGFEventInformation *eventInformation = new TGFEventInformation();
     eventInformation->SetPrimaryMomentumVector(mom);
     anEvent->SetUserInformation(eventInformation);
-    G4cout << "eventInformation was set" << G4endl;
+    //G4cout << "eventInformation was set" << G4endl;
 //---------------------------------------------------    
 
 

@@ -62,6 +62,7 @@ int main(int argc, char** argv)
     //executing run.mac
     
     G4UImanager* UI = G4UImanager::GetUIpointer();
+    
     UI->ApplyCommand("/control/execute run.mac");
     
     //visualization

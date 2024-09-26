@@ -12,15 +12,18 @@ TGFEventAction::~TGFEventAction()
 void TGFEventAction::BeginOfEventAction(const G4Event* anEvent)
 {
 //-------------------------------------------
-    G4cout << "************** TGFEventAction::BeginOfEventAction" << G4endl;
+    //G4cout << "************** TGFEventAction::BeginOfEventAction" << G4endl;
     TGFEventInformation *eventInformation = (TGFEventInformation*)anEvent->GetUserInformation();
     fPrimaryMomentumVector = eventInformation->GetPrimaryMomentumVector();
 
-    G4cout << "************** from TGFEventAction::BeginOfEventAction mom: " << fPrimaryMomentumVector << G4endl;
+    //G4cout << "************** from TGFEventAction::BeginOfEventAction mom: " << fPrimaryMomentumVector << G4endl;
     //G4cout << "************** from TGFEventAction::BeginOfEventAction mom   0: " << fPrimaryMomentumVector[0] << G4endl;
     //G4cout << "************** from TGFEventAction::BeginOfEventAction mom   1: " << fPrimaryMomentumVector[1] << G4endl;
 
 //-------------------------------------------
+
+    G4int n_event = anEvent->GetEventID();
+    G4cout << "start of n_event: "<< n_event <<G4endl;
 
     fCount =0;
     felectron_info = { {0, {}}, {1, {}}, {2, {}},{3, {}},{4, {}}, {5, {}}};
@@ -75,8 +78,7 @@ void TGFEventAction::EndOfEventAction(const G4Event* ev)
    
 
 
-    G4int n_event = ev->GetEventID();
-    G4cout << "n_event    =   "<< n_event <<G4endl;
+
 }
 
 
