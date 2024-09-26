@@ -123,7 +123,7 @@ void TGFDetectorConstruction::ConstructSDandField()
 
 	
 	TGFElectricFieldSetup* fieldSetup = new TGFElectricFieldSetup(fFieldVector);
-	for (int i =0; i < 300; i++)
+	for (int i =0; i < n_layers_cloud; i++)
 	{
 		fLogicCloud[i]->SetFieldManager(fieldSetup->GetLocalFieldManager(), true);
 	}
